@@ -48,8 +48,9 @@ const userSchema = mongoose.Schema(
 userSchema.pre("save", async function (next) {
 
     if (!this.isModified("password")) next();
-    this.password = await bcrypt.hash(this.password, 10);
+    this.password = await bcrypt.hash(this.password, 10) 
     next();
+    
 })
 
 // Compare the password if password is correct it will return true or else false
@@ -94,4 +95,4 @@ userSchema.methods.generateRefreshToken = async function () {
     return token;
 }
 
-export const User = mongoose.model("User", userSchema)
+ module.exports = mongoose.model("User", userSchema)
